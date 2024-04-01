@@ -1,0 +1,42 @@
+.container {
+    width: 1000%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  .center {
+    text-align: center;
+  }
+  
+
+  .center p {
+    font-size:18px;
+  }
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+  
+  .card {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .card h3 {
+    color: #333;
+  }
+  
+  .card p {
+    color: #666;
+    font-size:20px;
+  }
+  
+
+  .bullet-points li {
+    padding-left: 150px; 
+  }
