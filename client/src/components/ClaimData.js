@@ -1,166 +1,145 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import "../styles/ClaimDataStyles.css";
 
-function ClaimData() {
-  const [formData, setFormData] = useState({
-    field1: "",
-    field2: "",
-    field3: "",
-    field4: "",
-    field5: "",
-    field6: "",
-    field7: "",
-    field8: "",
-    field9: "",
-    field10: "",
-    selectedFile: null,
-  });
+function ClaimData () {
+  const imageUrl = 'https://previews.123rf.com/images/arrow/arrow1505/arrow150500022/40383202-insurance-background.jpg'; // Replace with your image path
 
-  const handleChange = (event) => {
-    const { name, value, files } = event.target;
+    return (
+      <>
+      <div style={{ backgroundImage: `url(${imageUrl})` }}>
+      <div className="claimcontainer" >
+          <h1>Car Insurance Claim Form</h1>
+          <p>You had your car incident? We will help you with your claim.</p>
+          <form>
+            <div className="date-of-accident">
+              <h3>Date of Accident:</h3>
+              <div className="grid-container">
+                <div className="div1">
+                  <label htmlFor="textInput">Month: </label>
+                  <input type="text" id="textInput" name="textInput" required />
+                </div>
+                <div className="div2">
+                  <label htmlFor="textInput">Week of Month: </label>
+                  <input type="text" id="textInput" name="textInput" required />
+                </div>
+                <div className="div3">
+                  <label htmlFor="textInput">Day of Week: </label>
+                  <input type="text" id="textInput" name="textInput" required />
+                </div>
+              </div>
+            </div>
 
-    if (name === "selectedFile") {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
+            <div className="accident-area">
+              <h3>Accident Area:</h3>
+              <div className="grid-container">
+              <div className="div4">
+                <label htmlFor="textInput">Accident Area: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              </div>
+            </div>
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    try {
-      const formDataCopy = { ...formData };
-      const { selectedFile, ...dataWithoutFile } = formDataCopy;
 
-      // Send non-file data to server
-      const response = await axios.post(
-        "http://localhost:3001/submit-claim",
-        dataWithoutFile
-      );
-      console.log("Non-file data response:", response.data);
+            <div className="date-of-claim">
+              <h3>Date of Claim:</h3>
+              <div className="grid-container">
+              <div className="div5">
+                <label htmlFor="textInput">Month Claimed: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div6">
+                <label htmlFor="textInput">Week of Month Claimed: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div7">
+                <label htmlFor="textInput">Day of Week Claimed: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              </div> 
+            </div>
 
-      // Handle file upload
-      if (selectedFile) {
-        const fileData = new FormData();
-        fileData.append("file", selectedFile);
+            <div className="personal-information">
+              <h3>Personal Information:</h3>
+              <div className="grid-container">
+              <div className="div8">
+                <label htmlFor="textInput">Sex: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div9">
+                <label htmlFor="textInput">Marital Status: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div10">
+                <label htmlFor="textInput">Age: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              </div>
+            </div>
 
-        const uploadResponse = await axios.post(
-          "http://localhost:3001/upload-file",
-          fileData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        console.log("File upload response:", uploadResponse.data);
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
-  return (
-    <div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <h2>Submit your Claim for insurance Here!!</h2>
-      <form onSubmit={handleSubmit} className="registration-form">
-        <div className="form-columns">
-          <div className="column">
-            <input
-              type="text"
-              name="field1"
-              value={formData.field1}
-              onChange={handleChange}
-              placeholder="Enter field 1"
-            />
-            <input
-              type="text"
-              name="field2"
-              value={formData.field2}
-              onChange={handleChange}
-              placeholder="Enter field 2"
-            />
-            <input
-              type="text"
-              name="field3"
-              value={formData.field3}
-              onChange={handleChange}
-              placeholder="Enter field 3"
-            />
-            <input
-              type="text"
-              name="field4"
-              value={formData.field4}
-              onChange={handleChange}
-              placeholder="Enter field 4"
-            />
-            <input
-              type="text"
-              name="field5"
-              value={formData.field5}
-              onChange={handleChange}
-              placeholder="Enter field 5"
-            />
-          </div>
-          <div className="column">
-            <input
-              type="text"
-              name="field6"
-              value={formData.field6}
-              onChange={handleChange}
-              placeholder="Enter field 6"
-            />
-            <input
-              type="text"
-              name="field7"
-              value={formData.field7}
-              onChange={handleChange}
-              placeholder="Enter field 7"
-            />
-            <input
-              type="text"
-              name="field8"
-              value={formData.field8}
-              onChange={handleChange}
-              placeholder="Enter field 8"
-            />
-            <input
-              type="text"
-              name="field9"
-              value={formData.field9}
-              onChange={handleChange}
-              placeholder="Enter field 9"
-            />
-            <input
-              type="text"
-              name="field10"
-              value={formData.field10}
-              onChange={handleChange}
-              placeholder="Enter field 10"
-            />
-          </div>
+            <div className="claim-details">
+              <h3>Claim Details:</h3>
+              <div className="grid-container">
+              <div className="div11">
+                <label htmlFor="textInput">Fault: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div12">
+                <label htmlFor="textInput">Policy Type: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div13">
+                <label htmlFor="textInput">Vehicle Category: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div14">
+                <label htmlFor="textInput">Vehicle Price: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div15">
+                <label htmlFor="textInput">Deductible: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div16">
+                <label htmlFor="textInput">Past Number of Claims: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div17">
+                <label htmlFor="textInput">Age of Vehicle: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div18">
+                <label htmlFor="textInput">Police Report Filed: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div19">
+                <label htmlFor="textInput">Witness Present: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div20">
+                <label htmlFor="textInput">Number of Supplements: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div21">
+                <label htmlFor="textInput">Address Change Claim: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              <div className="div22">
+                <label htmlFor="textInput">Base Policy: </label>
+                <input type="text" id="textInput" name="textInput" required />
+              </div>
+              </div>     
+            </div>
+          </form>
         </div>
-        <br></br>
-        <div className="pdf-column">
-          <label htmlFor="selectedFile">Upload PDF (Optional):</label>
-          <input
-            type="file"
-            id="selectedFile"
-            name="selectedFile"
-            accept="application/pdf"
-            onChange={handleChange}
-          />
+        <div class="form-group">
+          <button type="submit">Submit</button>
         </div>
-        <br></br>
-        <button type="Submit">Submit</button>
-      </form>
-    </div>
-  );
-}
+      </div>
+        
+      </>
+    );
+  }
+
 
 export default ClaimData;
