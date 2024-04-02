@@ -136,16 +136,6 @@ button[type="submit"]:hover {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 /* styles.css */
 
 /* Container for the form */
@@ -224,3 +214,24 @@ button[type="submit"] {
   cursor: pointer;
 }
 
+
+
+.upload-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.upload-container .upload1,
+.upload-container .upload2,
+.upload-container .upload3 {
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+
+
+.upload-btn {
+  margin-top: 5px;
+}
